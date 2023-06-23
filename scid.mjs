@@ -83,6 +83,19 @@ export function * records(fd, start = 0, stop = Infinity, step = 1) {
     }
 }
 
+export function records_quantity(fd) {
+    let promise = new Promise(function (resolve) {
+        fs_fstat(fd, function (err, stats) {
+            if (err) throw err
+
+            let size = stats.size - s_IntradayHeaderSize
+            let quantity = size / s_IntradayRecordSize
+            resolve(quantity)
+        })
+    })
+    return promise
+}
+
 export function close(fd) {
     fs_close(fd)
 }

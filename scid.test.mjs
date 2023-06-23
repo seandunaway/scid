@@ -44,6 +44,11 @@ test('records', await async function () {
     assert(records.length == 2)
 })
 
+test('records_quantity', await async function () {
+    let quantity = await scid.records_quantity(fd)
+    assert(quantity == 10)
+})
+
 test('close', await async function () {
     scid.close(fd)
 })
