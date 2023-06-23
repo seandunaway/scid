@@ -24,7 +24,7 @@ export function open(file) {
 export function header(fd) {
     let buffer = Buffer.allocUnsafe(s_IntradayHeaderSize)
     let promise = new Promise (function (resolve) {
-        fs_read(fd, buffer, 0, s_IntradayHeaderSize, null, function (err, bytesRead, buffer) {
+        fs_read(fd, buffer, 0, s_IntradayHeaderSize, 0, function (err, bytesRead, buffer) {
             if (err) throw err
             if (bytesRead !== s_IntradayHeaderSize) throw new Error ('header size')
 
