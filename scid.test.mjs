@@ -41,9 +41,8 @@ test('records', await async function () {
     }
     assert(records_undefined.length == 1)
 
-    let quantity = await scid.quantity(fd)
     let records_all = []
-    for await (let record of scid.records(fd, 0, quantity)) {
+    for await (let record of scid.records(fd, 0, await scid.quantity(fd))) {
         records_all.push(record)
     }
     assert(records_all.length == 10)
@@ -53,6 +52,25 @@ test('quantity', await async function () {
     let quantity = await scid.quantity(fd)
     assert(quantity == 9)
 })
+
+test('find_timestamps', await async function () {
+    let start_timestamp = new Date(1677011870544).getTime()
+    let stop_timestamp = new Date(1677012028608).getTime()
+    let index = await scid.find_timestamps(fd, start_timestamp, stop_timestamp)
+    assert(index.start == 2)
+    assert(index.stop == 7)
+
+    let records = []
+    for await (let record of scid.records(fd, index.start, index.stop)) {
+        records.push(record)
+    }
+    assert(records.length == 6)
+})
+
+test('console_log', {skip: true}, await async function () {
+    for await (let record of scid.records(fd, 0, await scid.quantity(fd))) {
+        console.log(record)
+    }
 })
 
 test('close', await async function () {

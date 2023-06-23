@@ -96,6 +96,25 @@ export function quantity(fd) {
     return promise
 }
 
+// @fix linear search sucks
+// at least find both in one pass
+export async function find_timestamps(fd, start_timestamp = 0, stop_timestamp = Infinity) {
+    let start = 0
+    let stop = await quantity(fd)
+
+    for (let i = start; i <= stop; i++) {
+        let s_IntradayRecord = await record(fd, i)
+        if (s_IntradayRecord.timestamp >= stop_timestamp) stop = i
+        if (s_IntradayRecord.timestamp <= start_timestamp) start = i
+    }
+
+    let index = {
+        start,
+        stop,
+    }
+    return index
+}
+
 export function close(fd) {
     fs_close(fd)
 }
