@@ -83,7 +83,7 @@ export async function * records(fd, start = 0, stop = 0, step = 1) {
     }
 }
 
-export function records_quantity(fd) {
+export function quantity(fd) {
     let promise = new Promise(function (resolve) {
         fs_fstat(fd, function (err, stats) {
             if (err) throw err
