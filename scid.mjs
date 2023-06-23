@@ -6,10 +6,10 @@ import {
     fstat as fs_fstat
 } from 'node:fs'
 
-let s_IntradayHeaderSize = 56
-let s_IntradayRecordSize = 40
-let epoch = new Date('December 30, 1899 UTC')
-let epoch_micro = BigInt(epoch.getTime() * 1000)
+export let s_IntradayHeaderSize = 56
+export let s_IntradayRecordSize = 40
+export let epoch = new Date('December 30, 1899 UTC')
+export let epoch_micro = BigInt(epoch.getTime() * 1000)
 
 export function open(file) {
     let promise = new Promise(function (resolve) {
