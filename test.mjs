@@ -1,9 +1,9 @@
 import {test} from 'node:test'
 import assert from 'node:assert'
 
-import * as scid from './scid.mjs'
+import * as scid from './index.mjs'
 
-let file = './scid.test.scid'
+let file = './test.scid'
 let fd
 
 test('open', async function () {
