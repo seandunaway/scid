@@ -46,13 +46,8 @@ export function header(fd) {
     return promise
 }
 
-export function record(fd, index) {
-    let position
-    if (typeof index !== 'undefined')
-        position = s_IntradayHeaderSize + (index * s_IntradayRecordSize)
-    else
-        position = null // fs.open() will sequential read
-
+export function record(fd, index = 0) {
+    let position = s_IntradayHeaderSize + (index * s_IntradayRecordSize)
 
     let buffer = Buffer.allocUnsafe(s_IntradayRecordSize)
     let promise = new Promise (function (resolve) {

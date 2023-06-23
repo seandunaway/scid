@@ -31,12 +31,7 @@ test('record_index', await async function () {
     assert.deepEqual(record_default, record_index)
 })
 
-test('record_sequential', await async function () {
-    record_sequential = await scid.record(fd)
-    assert(record_sequential.timestamp > record_index.timestamp)
-})
-
-test('records_generator', await async function () {
+test('records', await async function () {
     let records = []
     for await (let record of scid.records(fd, 2, 4, 2)) {
         records.push(2)
