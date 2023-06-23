@@ -6,9 +6,9 @@ import * as scid from './scid.mjs'
 let file = './scid.test.scid'
 let fd
 let header
-let record_default
-let record_index
-let record_sequential
+let record
+let record_0
+let record_1
 
 test('open', await async function () {
     fd = await scid.open(file)
@@ -21,14 +21,19 @@ test('header', await async function () {
 })
 
 test('record', await async function () {
-    record_default = await scid.record(fd)
-    assert(new Date(record_default.timestamp))
-    assert(record_default.High > record_default.Low)
+    record = await scid.record(fd)
+    assert(new Date(record.timestamp))
+    assert(record.High > record.Low)
 })
 
-test('record_index', await async function () {
-    record_index = await scid.record(fd, 0)
-    assert.deepEqual(record_default, record_index)
+test('record_0', await async function () {
+    record_0 = await scid.record(fd, 0)
+    assert.deepEqual(record, record_0)
+})
+
+test('record_1', await async function () {
+    record_1 = await scid.record(fd, 1)
+    assert.notDeepEqual(record_0, record_1)
 })
 
 test('records', await async function () {
