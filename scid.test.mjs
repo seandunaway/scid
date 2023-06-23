@@ -36,6 +36,14 @@ test('record_sequential', await async function () {
     assert(record_sequential.timestamp > record_index.timestamp)
 })
 
+test('records_generator', await async function () {
+    let records = []
+    for await (let record of scid.records(fd, 2, 4, 2)) {
+        records.push(2)
+    }
+    assert(records.length == 2)
+})
+
 test('close', await async function () {
     scid.close(fd)
 })
