@@ -77,7 +77,7 @@ export function record(fd, index = 0) {
     return promise
 }
 
-export function * records(fd, start = 0, stop = Infinity, step = 1) {
+export async function * records(fd, start = 0, stop = 0, step = 1) {
     for (let i = start; i <= stop; i += step) {
         yield record(fd, i)
     }
