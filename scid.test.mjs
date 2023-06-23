@@ -73,6 +73,31 @@ test('console_log', {skip: true}, async function () {
     }
 })
 
+test('ESM23.scid', {skip: false}, async function () {
+    console.time('open')
+    let fd = await scid.open('./ESM23.scid')
+    console.timeEnd('open')
+    console.log(fd)
+
+    console.time('quantity')
+    let quantity = await scid.quantity(fd)
+    console.timeEnd('quantity')
+    console.log(quantity)
+
+    // console.time('find_timestamps')
+    // let index = await scid.find_timestamps(fd, new Date('May 1, 2023').getTime(), new Date('May 2, 2023').getTime())
+    // console.timeEnd('find_timestamps')
+    // console.log(index)
+
+    console.time('records')
+    let count = 0
+    for await (let record of scid.records(fd, 0, 1_000_000)) {
+        count++
+    }
+    console.timeEnd('records')
+    console.log(count)
+})
+
 test('close', async function () {
     scid.close(fd)
 })
