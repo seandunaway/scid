@@ -6,17 +6,17 @@ import * as scid from './scid.mjs'
 let file = './scid.test.scid'
 let fd
 
-test('open', await async function () {
+test('open', async function () {
     fd = await scid.open(file)
     assert(fd > 0)
 })
 
-test('header', await async function () {
+test('header', async function () {
     let header = await scid.header(fd)
     assert(header.FileTypeUniqueHeaderID == 'SCID')
 })
 
-test('record', await async function () {
+test('record', async function () {
     let record = await scid.record(fd)
     assert(new Date(record.timestamp))
     assert(record.High > record.Low)
@@ -28,7 +28,7 @@ test('record', await async function () {
     assert.notDeepEqual(record_0, record_1)
 })
 
-test('records', await async function () {
+test('records', async function () {
     let records = []
     for await (let record of scid.records(fd, 2, 4, 2)) {
         records.push(record)
@@ -48,12 +48,12 @@ test('records', await async function () {
     assert(records_all.length == 10)
 })
 
-test('quantity', await async function () {
+test('quantity', async function () {
     let quantity = await scid.quantity(fd)
     assert(quantity == 9)
 })
 
-test('find_timestamps', await async function () {
+test('find_timestamps', async function () {
     let start_timestamp = new Date(1677011870544).getTime()
     let stop_timestamp = new Date(1677012028608).getTime()
     let index = await scid.find_timestamps(fd, start_timestamp, stop_timestamp)
@@ -67,12 +67,12 @@ test('find_timestamps', await async function () {
     assert(records.length == 6)
 })
 
-test('console_log', {skip: true}, await async function () {
+test('console_log', {skip: true}, async function () {
     for await (let record of scid.records(fd, 0, await scid.quantity(fd))) {
         console.log(record)
     }
 })
 
-test('close', await async function () {
+test('close', async function () {
     scid.close(fd)
 })
