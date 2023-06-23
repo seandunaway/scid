@@ -89,7 +89,7 @@ export function quantity(fd) {
             if (err) throw err
 
             let size = stats.size - s_IntradayHeaderSize
-            let quantity = size / s_IntradayRecordSize
+            let quantity = (size / s_IntradayRecordSize) - 1    // 0 indexed!
             resolve(quantity)
         })
     })

@@ -39,11 +39,20 @@ test('records', await async function () {
     for await (let record of scid.records(fd)) {
         records_undefined.push(record)
     }
+    assert(records_undefined.length == 1)
+
+    let quantity = await scid.quantity(fd)
+    let records_all = []
+    for await (let record of scid.records(fd, 0, quantity)) {
+        records_all.push(record)
+    }
+    assert(records_all.length == 10)
 })
 
 test('quantity', await async function () {
     let quantity = await scid.quantity(fd)
-    assert(quantity == 10)
+    assert(quantity == 9)
+})
 })
 
 test('close', await async function () {
