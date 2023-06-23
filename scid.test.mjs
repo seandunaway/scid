@@ -1,5 +1,6 @@
 import {test} from 'node:test'
 import assert from 'node:assert'
+
 import * as scid from './scid.mjs'
 
 let file = './scid.test.scid'
