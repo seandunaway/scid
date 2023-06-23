@@ -1,5 +1,10 @@
 import {Buffer} from 'node:buffer'
-import {open as fs_open, close as fs_close, read as fs_read} from 'node:fs'
+import {
+    open as fs_open,
+    close as fs_close,
+    read as fs_read,
+    fstat as fs_fstat
+} from 'node:fs'
 
 let s_IntradayHeaderSize = 56
 let s_IntradayRecordSize = 40

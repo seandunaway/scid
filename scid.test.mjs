@@ -20,7 +20,7 @@ test('header', await async function () {
     assert(header.FileTypeUniqueHeaderID == 'SCID')
 })
 
-test('record_default', await async function () {
+test('record', await async function () {
     record_default = await scid.record(fd)
     assert(new Date(record_default.timestamp))
     assert(record_default.High > record_default.Low)
