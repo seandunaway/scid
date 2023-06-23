@@ -69,7 +69,7 @@ export function record(fd, index = 0) {
 
             if (! s_IntradayRecord.SCDateTimeMS) throw new Error ('record id')
 
-            s_IntradayRecord.timestamp = Number(s_IntradayRecord.SCDateTimeMS + epoch_micro) / 1000
+            s_IntradayRecord.timestamp = Math.trunc(Number(s_IntradayRecord.SCDateTimeMS + epoch_micro) / 1000)
 
             resolve (s_IntradayRecord)
         })
