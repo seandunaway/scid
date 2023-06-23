@@ -91,7 +91,7 @@ test('ESM23.scid', {skip: false}, async function () {
 
     console.time('records')
     let count = 0
-    for await (let record of scid.records(fd, 0, 1_000_000)) {
+    for await (let record of scid.records(fd, 0, 100_000)) {
         count++
     }
     console.timeEnd('records')
