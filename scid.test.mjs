@@ -53,10 +53,10 @@ test('quantity', async function () {
     assert(quantity == 9)
 })
 
-test('find_timestamps', async function () {
+test('find_index', async function () {
     let start_timestamp = new Date(1677011870544).getTime()
     let stop_timestamp = new Date(1677012028608).getTime()
-    let index = await scid.find_timestamps(fd, start_timestamp, stop_timestamp)
+    let index = await scid.find_index(fd, start_timestamp, stop_timestamp)
     assert(index.start == 2)
     assert(index.stop == 7)
 
@@ -84,9 +84,9 @@ test('ESM23.scid', {skip: false}, async function () {
     console.timeEnd('quantity')
     console.log(quantity)
 
-    // console.time('find_timestamps')
-    // let index = await scid.find_timestamps(fd, new Date('May 1, 2023').getTime(), new Date('May 2, 2023').getTime())
-    // console.timeEnd('find_timestamps')
+    // console.time('find_index')
+    // let index = await scid.find_index(fd, new Date('May 1, 2023').getTime(), new Date('May 2, 2023').getTime())
+    // console.timeEnd('find_index')
     // console.log(index)
 
     console.time('records')

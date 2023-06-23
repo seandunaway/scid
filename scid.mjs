@@ -98,7 +98,7 @@ export function quantity(fd) {
 
 // @fix linear search sucks
 // at least find both in one pass
-export async function find_timestamps(fd, start_timestamp = 0, stop_timestamp = Infinity) {
+export async function find_index(fd, start_timestamp = 0, stop_timestamp = Infinity) {
     let start = 0
     let stop = await quantity(fd)
 
